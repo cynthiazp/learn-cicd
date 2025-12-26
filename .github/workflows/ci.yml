@@ -22,7 +22,7 @@ jobs:
         run: go test -v -cover ./...
 
   style:
-    name: Code Style
+    name: Style
     runs-on: ubuntu-latest
 
     steps:
@@ -35,9 +35,4 @@ jobs:
           go-version: "1.25.1"
 
       - name: Run gofmt
-        run: |
-          if [ -n "$(gofmt -l .)" ]; then
-            echo "The following files are not properly formatted:"
-            gofmt -l .
-            exit 1
-          fi
+        run: test -z $(go fmt ./...)
